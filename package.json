@@ -1,0 +1,19 @@
+{
+    "name": "e2e-cypress",
+    "version": "1.0.0",
+    "description": "Projeto de testes automatizados end-to-end",
+    "main": "index.js",
+    "scripts": {
+        "cy:open": "npx cypress open",
+        "cy:run": "npx cypress run --browser=chrome"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zanettep/e2e-cypress.git"
+    },
+    "author": "Paulo Zanette",
+    "license": "ISC",
+    "devDependencies": {
+      "cypress": "^14.3.3"
+    }
+}
