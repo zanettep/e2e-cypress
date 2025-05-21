@@ -1,5 +1,8 @@
+import loginAction from '../actions/loginAction.js'
+
 describe('Login', () => {
-    it('Login with sucess', () => {
-        cy.login()
+    it('Send forgot password instructions', () => {
+        cy.visit('/')
+        loginAction.assertForgotPasswordInstructions()
     })
 })
