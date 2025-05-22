@@ -1,8 +1,16 @@
-import loginAction from '../actions/loginAction.js'
+import login from '../actions/loginAction'
 
 describe('Login', () => {
-    it('Send forgot password instructions', () => {
+    beforeEach(() => {
         cy.visit('/')
-        loginAction.assertForgotPasswordInstructions()
+    })
+
+    it('Send forgot password instructions', () => {
+        login.assertForgotPasswordInstructions()
+    })
+
+    it('User logout', () => {
+        cy.login()
+        login.assertUserLogout()
     })
 })
