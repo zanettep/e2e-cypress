@@ -21,4 +21,4 @@ jobs:
         run: npm ci
 
       - name: Run e2e tests
-        run: npx cypress run
+        run: npx cypress run --browser=chrome
