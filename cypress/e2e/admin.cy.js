@@ -7,6 +7,6 @@ describe('Admin', () => {
 
     it('Search user', () => {
         cy.login()
-        admin.assertUserData(userData)
+        admin.assertUserData()
     })
 })
