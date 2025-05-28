@@ -1,32 +1,23 @@
-import user from '../api/userApi'
-
 class Admin {
-    assertUserData() {
-        cy.contains('Admin').click()
+    assertUserData(userData) {
+        this.searchUser(userData[0])
+        cy.contains('(1) Record Found').should('be.visible')
 
-        user.getUsers().then((response) => {
-            const firstUser = response.body.data[0]
-            const userData = [
-                firstUser.userName,
-                firstUser.userRole.name,
-                this.getUserFullName(firstUser.employee),
-                firstUser.status ? 'Enabled' : 'Disabled'
-            ]
-
-            cy.get('div .oxd-form-row > div .oxd-input').type(userData[0])
-            cy.contains('Search').click()
-            cy.contains('(1) Record Found').should('be.visible')
-
-            userData.forEach((expectedUserData, i) => {
-                cy.get('[role="cell"]').eq(i + 1).should('have.text', expectedUserData);
-            })
+        userData.forEach((expectedUserData, i) => {
+            cy.get('[role="cell"]').eq(i + 1).should('have.text', expectedUserData)
         })
     }
 
-    getUserFullName(employee) {
-        return employee.middleName && employee.middleName.trim() !== '' 
-            ? `${employee.firstName} ${employee.middleName} ${employee.lastName}`
-            : `${employee.firstName} ${employee.lastName}`
+    assertUserNotFound(userName) {
+        this.searchUser(userName)
+        cy.contains('No Records Found').should('be.visible')
+        cy.get('.oxd-table-row.oxd-table-card > .oxd-table-row').should('not.exist')
+    }
+
+    searchUser(userName) {
+        cy.contains('Admin').click()
+        cy.get('div .oxd-form-row > div .oxd-input').type(userName)
+        cy.contains('Search').click()
     }
 }
 
