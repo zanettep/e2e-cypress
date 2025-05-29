@@ -6,7 +6,7 @@ describe('Admin', () => {
         cy.visit('/')
     })
 
-    it('Search user by username', () => {
+  	it('Search user by username', () => {
         cy.login()
 
         user.getUsers().then((response) => {

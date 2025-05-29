@@ -6,10 +6,10 @@ module.exports = defineConfig({
     },
     chromeWebSecurity: false,
     viewportWidth: 1400,
-	viewportHeight: 900,
+    viewportHeight: 900,
     defaultCommandTimeout: 15000,
     retries: {
         runMode: 2,
-        openMode: 2 
+        openMode: 2
     }
 })

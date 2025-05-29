@@ -5,7 +5,9 @@
     "main": "index.js",
     "scripts": {
         "cy:open": "npx cypress open",
-        "cy:run": "npx cypress run --browser=chrome"
+        "cy:run": "npx cypress run --browser=chrome",
+        "lint": "eslint",
+        "lint:fix": "eslint --fix"
     },
     "repository": {
         "type": "git",
@@ -14,6 +16,8 @@
     "author": "Paulo Zanette",
     "license": "ISC",
     "devDependencies": {
-      "cypress": "^14.3.3"
+        "cypress": "^14.3.3",
+        "eslint": "^9.27.0",
+        "eslint-plugin-cypress": "^4.3.0"
     }
 }
