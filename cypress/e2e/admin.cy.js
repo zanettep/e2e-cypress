@@ -23,9 +23,9 @@ describe('Admin', () => {
     })
 
     it('Search for an unregistered user', () => {
-        const userName = 'zanettepr'
+        const username = 'zanettepr'
 
         cy.login()
-        admin.assertUserNotFound(userName)
+        admin.assertUserNotFound(username)
     })
 })
