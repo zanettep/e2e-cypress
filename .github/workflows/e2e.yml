@@ -28,12 +28,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: lint
 
-    strategy:
-      matrix:
-        container: [1, 2]
+   strategy:
+    matrix:
+      specFile: 
+        - "cypress/e2e/admin.cy.js"
+        - "cypress/e2e/login.cy.js"
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repository 
         uses: actions/checkout@v4
 
       - name: Install Node.js
@@ -45,7 +47,4 @@ jobs:
         run: npm ci
 
       - name: Run e2e tests
-        run: npx cypress run --record --parallel --browser=chrome
-        env:
-          CYPRESS_RECORD_KEY: ${{ secrets.E2E_CYPRESS_RECORD_KEY }}
-          CYPRESS_PROJECT_ID: ${{ secrets.E2E_CYPRESS_PROJECT_ID }} 
+        run: npx cypress run --browser=chrome --spec ${{ matrix.specFile }}
