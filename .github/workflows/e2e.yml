@@ -28,11 +28,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: lint
 
-   strategy:
-    matrix:
-      specFile: 
-        - "cypress/e2e/admin.cy.js"
-        - "cypress/e2e/login.cy.js"
+    strategy:
+      matrix:
+        specFile: 
+          - "cypress/e2e/admin.cy.js"
+          - "cypress/e2e/login.cy.js"
 
     steps:
       - name: Checkout repository 
