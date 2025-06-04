@@ -1,4 +1,3 @@
-import user from '../api/userApi'
 import admin from '../actions/adminAction'
 
 describe('Admin', () => {
@@ -9,16 +8,23 @@ describe('Admin', () => {
   	it('Search user by username', () => {
         cy.login()
 
-        user.getUsers().then((response) => {
-            const firstUser = response.body.data[0]
+        cy.getRandomUser().then((user) => {
             const userData = [
-                firstUser.userName,
-                firstUser.userRole.name,
-                `${firstUser.employee.firstName} ${firstUser.employee.lastName}`,
-                firstUser.status ? 'Enabled' : 'Disabled'
+                user.userName,
+                user.userRole.name,
+                `${user.employee.firstName} ${user.employee.lastName}`,
+                user.status ? 'Enabled' : 'Disabled'
             ]
 
             admin.assertUserData(userData)
+        })
+    })
+
+    it('Delete searched user', () => {
+        cy.login()
+
+        cy.getRandomUser().then((user) => {
+            admin.assertDeletedUser(user.userName)
         })
     })
 

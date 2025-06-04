@@ -8,6 +8,15 @@ class Admin {
         })
     }
 
+    assertDeletedUser(userName) {
+        this.searchUser(userName)
+        cy.contains('(1) Record Found').should('be.visible')
+        cy.get('.bi-trash').click()
+        cy.contains('Yes, Delete').click()
+        cy.get('.oxd-table-body').should('not.exist')
+        cy.contains('No Records Found').should('be.visible')
+    }
+
     assertUserNotFound(userName) {
         this.searchUser(userName)
         cy.contains('No Records Found').should('be.visible')
