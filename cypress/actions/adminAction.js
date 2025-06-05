@@ -1,7 +1,6 @@
 class Admin {
     assertUserData(userData) {
         this.searchUser(userData[0])
-        cy.contains('(1) Record Found').should('be.visible')
 
         userData.forEach((expectedUserData, i) => {
             cy.get('[role="cell"]').eq(i + 1).should('have.text', expectedUserData)
@@ -10,7 +9,6 @@ class Admin {
 
     assertDeletedUser(userName) {
         this.searchUser(userName)
-        cy.contains('(1) Record Found').should('be.visible')
         cy.get('.bi-trash').click()
         cy.contains('Yes, Delete').click()
         cy.get('.oxd-table-body').should('not.exist')
@@ -18,15 +16,21 @@ class Admin {
     }
 
     assertUserNotFound(userName) {
-        this.searchUser(userName)
+        this.searchUser(userName, false)
         cy.contains('No Records Found').should('be.visible')
         cy.get('.oxd-table-row.oxd-table-card > .oxd-table-row').should('not.exist')
     }
 
-    searchUser(userName) {
+    searchUser(userName, expectOneRecord = true) {
         cy.contains('Admin').click()
         cy.get('div .oxd-form-row > div .oxd-input').type(userName)
         cy.contains('Search').click()
+
+        if (expectOneRecord) {
+            cy.contains('(1) Record Found').should('be.visible')
+        } else {
+            cy.contains('No Records Found').should('be.visible')
+        }
     }
 }
 

@@ -1,12 +1,9 @@
+import login from '../actions/loginAction'
 import admin from '../actions/adminAction'
 
 describe('Admin', () => {
-    beforeEach(() => {
-        cy.visit('/')
-    })
-
   	it('Search user by username', () => {
-        cy.login()
+        login.userLogin()
 
         cy.getRandomUser().then((user) => {
             const userData = [
@@ -21,7 +18,7 @@ describe('Admin', () => {
     })
 
     it('Delete searched user', () => {
-        cy.login()
+        login.userLogin()
 
         cy.getRandomUser().then((user) => {
             admin.assertDeletedUser(user.userName)
@@ -29,9 +26,9 @@ describe('Admin', () => {
     })
 
     it('Search for an unregistered user', () => {
-        const username = 'zanettepr'
+        const userName = 'zanettepr'
 
-        cy.login()
-        admin.assertUserNotFound(username)
+        login.userLogin()
+        admin.assertUserNotFound(userName)
     })
 })
