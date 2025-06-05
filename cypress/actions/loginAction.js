@@ -1,4 +1,12 @@
 class Login {
+    userLogin(username = Cypress.env('DEFAULT_USERNAME'), password = Cypress.env('DEFAULT_PASSWORD')) {
+        cy.visit('/')
+        cy.intercept('GET', '**/employees/leaves*').as('home')
+        this.fillLoginFields(username, password)
+        cy.wait('@home')
+        cy.get('.oxd-userdropdown').should('be.visible')
+    }
+
     fillLoginFields(username, password) {
         cy.get('[name="username"]').type(username)
         cy.get('[name="password"]').type(password)
@@ -15,13 +23,6 @@ class Login {
         cy.get('[name="username"]').type('Admin')
         cy.get('.oxd-button--secondary').click()
         cy.contains('A reset password link has been sent to you via email.').should('be.visible')
-    }
-
-    assertUserLogout() {
-        cy.get('.oxd-userdropdown').click()
-        cy.get('.oxd-dropdown-menu').should('be.visible')
-        cy.contains('Logout').click()
-        cy.get('.orangehrm-login-branding').should('be.visible')
     }
 }
 

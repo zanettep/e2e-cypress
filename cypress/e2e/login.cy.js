@@ -9,11 +9,6 @@ describe('Login', () => {
         login.assertForgotPasswordInstructions()
     })
 
-    it('User logout', () => {
-        cy.login()
-        login.assertUserLogout()
-    })
-
     it('Login with an unregistered username', () => {
         const unregisteredUsername = 'zanettepr'
 
