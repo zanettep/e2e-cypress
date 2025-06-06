@@ -17,11 +17,11 @@ describe('Admin', () => {
         })
     })
 
-    it('Delete searched user', () => {
+    it.only('Delete searched user', () => {
         login.userLogin()
 
-        cy.getRandomUser().then((user) => {
-            admin.assertDeletedUser(user.userName)
+        cy.createUser().then((userData) => {
+            admin.assertDeletedUser(userData.username)
         })
     })
 
