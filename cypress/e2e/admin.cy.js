@@ -17,7 +17,7 @@ describe('Admin', () => {
         })
     })
 
-    it.only('Delete searched user', () => {
+    it('Delete searched user', () => {
         login.userLogin()
 
         cy.createUser().then((userData) => {
