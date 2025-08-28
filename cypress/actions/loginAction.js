@@ -1,7 +1,7 @@
 class Login {
     userLogin(username = Cypress.env('DEFAULT_USERNAME'), password = Cypress.env('DEFAULT_PASSWORD')) {
         cy.visit('/')
-        cy.intercept('GET', '**/employees/leaves*').as('home')
+        cy.intercept('GET', '**/dashboard/employees/*').as('home')
         this.fillLoginFields(username, password)
         cy.wait('@home')
         cy.get('.oxd-userdropdown').should('be.visible')
