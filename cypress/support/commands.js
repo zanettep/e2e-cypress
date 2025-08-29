@@ -10,10 +10,21 @@ Cypress.Commands.add('getRandomUser', () => {
     })
 })
 
+Cypress.Commands.add('getRandomEmployeeNumber', () => {
+    return user.getEmployees().then((response) => {
+        const randomEmployees = response.body.data
+        return randomEmployees[
+            Math.floor(Math.random() * randomEmployees.length)
+        ].empNumber
+    })
+})
+
 Cypress.Commands.add('createUser', () => {
     cy.fixture('userData.json').then((userData) => {
-        userData.username = fakerBr.internet.userName()
-
-        return user.createUser(userData).then(() => userData)
+        cy.getRandomEmployeeNumber().then((employeeNumber) => {
+            userData.username = fakerBr.internet.userName()
+            userData.empNumber = employeeNumber
+            return user.createUser(userData).then(() => userData)
+        })
     })
 })

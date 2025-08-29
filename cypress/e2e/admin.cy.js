@@ -5,12 +5,12 @@ describe('Admin', () => {
   	it('Search user by username', () => {
         login.userLogin()
 
-        cy.getRandomUser().then((user) => {
+        cy.getRandomUser().then((response) => {
             const userData = [
-                user.userName,
-                user.userRole.name,
-                `${user.employee.firstName} ${user.employee.lastName}`,
-                user.status ? 'Enabled' : 'Disabled'
+                response.userName,
+                response.userRole.name,
+                `${response.employee.firstName} ${response.employee.lastName}`,
+                response.status ? 'Enabled' : 'Disabled'
             ]
 
             admin.assertUserData(userData)
@@ -20,8 +20,8 @@ describe('Admin', () => {
     it('Delete searched user', () => {
         login.userLogin()
 
-        cy.createUser().then((userData) => {
-            admin.assertDeletedUser(userData.username)
+        cy.createUser().then((response) => {
+            admin.assertDeletedUser(response.username)
         })
     })
 
